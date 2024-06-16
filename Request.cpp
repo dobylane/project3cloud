@@ -9,5 +9,6 @@ string Request::randomIPGen() {
 }
 
 Request Request::randomRequestGen() {
-    return Request(randomIPGen(), randomIPGen(), rand() % 10 + 1);
+    // return Request(randomIPGen(), randomIPGen(), rand() % 10 + 1);
+    return Request(randomIPGen(), randomIPGen(), 1); //Set time to 1 for testing
 }
