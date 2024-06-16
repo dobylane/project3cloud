@@ -6,13 +6,12 @@
 
 class WebServer {
     public:
-    WebServer(int id, RequestQueue& requestQueue);
-    void start();
-    void run();
+    WebServer(int id);
+    bool status();
+    void run(const Request& request);
 
     private:
         int id;
-        RequestQueue& requestQueue;
-        thread serverThread;
+        bool idle;
 };
 #endif
