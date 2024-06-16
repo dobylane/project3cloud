@@ -2,6 +2,7 @@
 #define WEBSERVER_H
 
 #include <thread>
+#include <atomic>
 #include "RequestQueue.h"
 
 class WebServer {
@@ -13,5 +14,6 @@ class WebServer {
     private:
         int id;
         bool idle;
+        void processRequest(const Request& request);
 };
 #endif
