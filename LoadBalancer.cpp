@@ -6,7 +6,7 @@
 LoadBalancer::LoadBalancer(int numServers) {
     for (int i = 0; i < numServers; i++) {
         webServers.emplace_back(i);
-        cout << webServers.size() << endl;
+        // cout << webServers.size() << endl;
     }
     
 }
@@ -17,10 +17,9 @@ void LoadBalancer::addRequest(const Request& request) {
 
 void LoadBalancer::run(int time) {
     for (int i = 0; i < time; i++) {
-    //     if (rand() % 2 == 0) { // 50/50 chance of being added? Is this randomness that is asked for
-    //         addRequest(Request::randomRequestGen());
-    //     }
-    // }
+        if (rand() % 2 == 0) { // 50/50 chance of being added? Is this randomness that is asked for
+            addRequest(Request::randomRequestGen());
+        }
         for (auto& server : webServers) {
             if (server.status()) {
                 if(!requestQueue.isEmpty()) {

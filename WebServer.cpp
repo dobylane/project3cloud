@@ -37,6 +37,7 @@ void WebServer::processRequestFunction(const Request& request) {
     money = generateRandomUSDAmount();
     cout << fixed << setprecision(2) <<"WebServer " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " input: " << money << endl;
     money = CurrencyConverter::convertUSDtoSGD(money);
+    this_thread::sleep_for(chrono::seconds(request.time)); // There is still the usage of time needed to process
     cout << fixed << setprecision(2) << "WebServer COMPLETE " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " Converted: " << money << endl;
     idle = true;
 }

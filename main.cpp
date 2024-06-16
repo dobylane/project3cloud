@@ -19,7 +19,7 @@ int main() {
     
     // RequestQueue requestQueue;
     LoadBalancer LoadBalancer(servers); // This will make the number of webservers in the load balancer based on input
-    for (int i = 0; i < servers * 100; i++) {
+    for (int i = 0; i < servers * 2; i++) {
         LoadBalancer.addRequest(Request::randomRequestGen()); // This will add a request to the requestqueue inside the load balancer
         // This will make the full servers queue loop
 
