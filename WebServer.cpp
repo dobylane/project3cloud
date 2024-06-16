@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 
-WebServer::WebServer(int id) : id(id) {}
+WebServer::WebServer(int id) : id(id), idle(true) {}
 
 bool WebServer::status() {
     return idle;
