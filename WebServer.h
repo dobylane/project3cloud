@@ -4,6 +4,7 @@
 #include <thread>
 #include <atomic>
 #include "RequestQueue.h"
+#include "CurrencyConverter.h"
 
 class WebServer {
     public:
@@ -12,8 +13,10 @@ class WebServer {
     void run(const Request& request);
 
     private:
+        double money;
         int id;
         bool idle;
         void processRequest(const Request& request);
+        void processRequestFunction(const Request& request);
 };
 #endif
