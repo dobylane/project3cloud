@@ -16,19 +16,19 @@ void LoadBalancer::addRequest(const Request& request) {
 }
 
 void LoadBalancer::run(int time) {
-    // for (int i = 0; i < time; i++) {
+    for (int i = 0; i < time; i++) {
     //     if (rand() % 2 == 0) { // 50/50 chance of being added? Is this randomness that is asked for
     //         addRequest(Request::randomRequestGen());
     //     }
     // }
-    for (auto& server : webServers) {
-        cout << "test" << endl;
-        if (server.status()) {
-            if(!requestQueue.isEmpty()) {
-                Request request = requestQueue.getRequest();
-                server.run(request);
+        for (auto& server : webServers) {
+            if (server.status()) {
+                if(!requestQueue.isEmpty()) {
+                    Request request = requestQueue.getRequest();
+                    server.run(request);
+                }
             }
         }
+        // this_thread::sleep_for(chrono::seconds(1));
     }
-    this_thread::sleep_for(chrono::seconds(1));
 }
