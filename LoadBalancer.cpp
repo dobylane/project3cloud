@@ -47,7 +47,10 @@ void LoadBalancer::run(int time) {
                     server.run(request);
                 }
             }
+            
         }
+        cout << "Queue Size" << requestQueue.qsize() << endl;
         this_thread::sleep_for(chrono::seconds(1));
+        
     }
 }

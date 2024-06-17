@@ -82,7 +82,7 @@ void WebServer::processRequestFunction(const Request& request) {
         logFile << logMessage << endl;
     }
     money = CurrencyConverter::convertUSDtoSGD(money);
-    this_thread::sleep_for(chrono::milliseconds(request.time)); // There is still the usage of time needed to process
+    this_thread::sleep_for(chrono::seconds(request.time)); // There is still the usage of time needed to process
     logStream.str("");
     logStream << fixed << setprecision(2) << "WebServer COMPLETE " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " Converted: " << money << endl;
     logMessage = logStream.str();
