@@ -6,6 +6,16 @@
 
 using namespace std;
 
+/**
+ * @brief Main function to simulate the load balancer.
+ * 
+ * This function initializes the number of servers and the runtime for the load balancer simulation.
+ * It generates random requests and adds them to the load balancer's request queue.
+ * Finally, it runs the load balancer for the specified runtime.
+ * 
+ * @return int Returns 0 upon successful completion.
+ */
+
 int main() {
     int servers, runtime;
     srand(static_cast<unsigned int>(time(nullptr)));
@@ -19,7 +29,7 @@ int main() {
     
     // RequestQueue requestQueue;
     LoadBalancer LoadBalancer(servers); // This will make the number of webservers in the load balancer based on input
-    for (int i = 0; i < servers * 2; i++) {
+    for (int i = 0; i < servers * 100; i++) {
         LoadBalancer.addRequest(Request::randomRequestGen()); // This will add a request to the requestqueue inside the load balancer
         // This will make the full servers queue loop
 

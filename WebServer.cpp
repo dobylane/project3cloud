@@ -5,8 +5,18 @@
 #include <random>
 #include <iomanip>
 
+/**
+ * @brief Constructs a WebServer object.
+ * 
+ * @param id The unique identifier for the web server.
+ */
 WebServer::WebServer(int id) : id(id), idle(true) {}
 
+/**
+ * @brief Generates a random USD amount between 1 and 1,000,000.
+ * 
+ * @return double The generated random USD amount.
+ */
 double generateRandomUSDAmount() {
     std::random_device rd; // Seed for the random number engine
     std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
@@ -15,16 +25,34 @@ double generateRandomUSDAmount() {
     return dis(gen);
 }
 
+/**
+ * @brief Checks the status of the web server.
+ * 
+ * @return True if the server is idle, false otherwise.
+ */
 bool WebServer::status() {
     return idle;
 }
 
+/**
+ * @brief Runs the web server to process a given request.
+ * 
+ * @param request The request to be processed.
+ */
 void WebServer::run(const Request& request) {
     idle = false;
     // thread(&WebServer::processRequest, this, request).detach();
     thread(&WebServer::processRequestFunction, this, request).detach();
 }
 
+/**
+ * @brief Processes a given request.
+ * 
+ * This function outputs the request details, simulates processing time,
+ * and marks the server as idle upon completion.
+ * 
+ * @param request The request to be processed.
+ */
 void WebServer::processRequest(const Request& request) {
     cout << "WebServer " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " cycles: " << request.time << endl;
     this_thread::sleep_for(chrono::seconds(request.time));
@@ -32,6 +60,14 @@ void WebServer::processRequest(const Request& request) {
     idle = true;
 }
 
+/**
+ * @brief Function to handle request processing in a separate thread.
+ * 
+ * This function generates a random USD amount, converts it to SGD,
+ * simulates processing time, and marks the server as idle upon completion.
+ * 
+ * @param request The request to be processed.
+ */
 void WebServer::processRequestFunction(const Request& request) {
     srand(time(NULL));
     money = generateRandomUSDAmount();
