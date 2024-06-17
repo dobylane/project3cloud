@@ -37,5 +37,6 @@ public:
     bool isEmpty();
     
     queue<Request> q; ///< Queue to store requests.
+    int qsize(); /// Size number
 };
 #endif

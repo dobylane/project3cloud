@@ -3,6 +3,7 @@
 
 #include <thread>
 #include <atomic>
+#include <fstream>
 #include "RequestQueue.h"
 #include "CurrencyConverter.h"
 
@@ -40,6 +41,7 @@ class WebServer {
         double money; ///< Amount of money processed by the server.
         int id; ///< Unique identifier of the server.
         bool idle; ///< Indicates whether the server is idle.
+        ofstream logFile;
 
         /**
          * @brief Processes a given request.

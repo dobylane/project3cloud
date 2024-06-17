@@ -64,6 +64,7 @@
         "span": "cpp",
         "sstream": "cpp",
         "stop_token": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "random": "cpp"
     }
 }

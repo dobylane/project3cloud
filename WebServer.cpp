@@ -4,13 +4,17 @@
 #include <thread>
 #include <random>
 #include <iomanip>
+#include <fstream>
+#include <sstream>
 
 /**
  * @brief Constructs a WebServer object.
  * 
  * @param id The unique identifier for the web server.
  */
-WebServer::WebServer(int id) : id(id), idle(true) {}
+WebServer::WebServer(int id) : id(id), idle(true) {
+    logFile.open("log.txt", ios_base::app);
+}
 
 /**
  * @brief Generates a random USD amount between 1 and 1,000,000.
@@ -69,11 +73,22 @@ void WebServer::processRequest(const Request& request) {
  * @param request The request to be processed.
  */
 void WebServer::processRequestFunction(const Request& request) {
-    srand(time(NULL));
     money = generateRandomUSDAmount();
-    cout << fixed << setprecision(2) <<"WebServer " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " input: " << money << endl;
+    ostringstream logStream;
+    logStream << fixed << setprecision(2) <<"WebServer " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " input: " << money << endl;
+    string logMessage = logStream.str();
+    cout << logMessage << endl;
+    if (logFile.is_open()) {
+        logFile << logMessage << endl;
+    }
     money = CurrencyConverter::convertUSDtoSGD(money);
-    this_thread::sleep_for(chrono::seconds(request.time)); // There is still the usage of time needed to process
-    cout << fixed << setprecision(2) << "WebServer COMPLETE " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " Converted: " << money << endl;
+    this_thread::sleep_for(chrono::milliseconds(request.time)); // There is still the usage of time needed to process
+    logStream.str("");
+    logStream << fixed << setprecision(2) << "WebServer COMPLETE " << id << " ipIn: " << request.ipIn << " ipOut: " << request.ipOut << " Converted: " << money << endl;
+    logMessage = logStream.str();
+    cout << logMessage << endl;
+    if (logFile.is_open()) {
+        logFile << logMessage << endl;
+    }
     idle = true;
 }

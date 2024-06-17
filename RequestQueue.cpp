@@ -35,3 +35,7 @@ Request RequestQueue::getRequest() {
 bool RequestQueue::isEmpty() {
     return q.empty();
 }
+
+int RequestQueue::qsize() {
+    return q.size();
+}
